@@ -41,7 +41,7 @@ export default function LeadMagnet() {
   return (
     <section
       ref={ref}
-      className="py-24 relative overflow-hidden"
+      className="py-16 md:py-24 relative overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, rgba(200,169,110,0.1) 0%, rgba(196,146,122,0.08) 100%)',
       }}
@@ -60,13 +60,13 @@ export default function LeadMagnet() {
       />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Visual side */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9 }}
-            className="relative"
+            className="relative order-2 md:order-1"
             aria-hidden="true"
           >
             {/* PDF mockup */}
@@ -158,6 +158,7 @@ export default function LeadMagnet() {
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, delay: 0.2 }}
+            className="order-1 md:order-2"
           >
             <span className="text-sm tracking-widest uppercase font-medium" style={{ color: 'var(--rose)' }}>
               בחינם לגמרי

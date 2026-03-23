@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 
-const hasResend = !!process.env.RESEND_API_KEY
-let resend: import('resend').Resend | null = null
-if (hasResend) {
-  const { Resend } = require('resend')
-  resend = new Resend(process.env.RESEND_API_KEY)
-}
-
 const contactSchema = z.object({
   name: z.string().min(2, 'שם חובה'),
   phone: z.string().min(9, 'מספר טלפון לא תקין').max(15),
@@ -31,12 +24,17 @@ export async function POST(req: NextRequest) {
     const data = parsed.data
     const nataliEmail = process.env.NATALI_EMAIL || 'dev@localhost'
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@natali-healing.co.il'
+    const resendKey = process.env.RESEND_API_KEY
 
     // If no Resend API key — log to console (dev mode) and return success
-    if (!resend) {
+    if (!resendKey) {
       console.log('\n📬 [DEV] Form submission received (no RESEND_API_KEY):', data)
       return NextResponse.json({ success: true, message: 'הפנייה נשלחה בהצלחה!' })
     }
+
+    // Dynamic import avoids module-level require() issues with ESM-only packages
+    const { Resend } = await import('resend')
+    const resend = new Resend(resendKey)
 
     if (data.type === 'lead_magnet') {
       await resend.emails.send({

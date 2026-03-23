@@ -65,7 +65,7 @@ export default function TrustBar() {
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={i}
@@ -78,14 +78,14 @@ export default function TrustBar() {
                 {stat.icon}
               </div>
               <div
-                className="font-frank text-4xl md:text-5xl font-bold mb-2"
+                className="font-frank text-3xl md:text-5xl font-bold mb-2"
                 aria-label={`${stat.prefix}${stat.value}${stat.suffix} ${stat.label}`}
               >
                 {stat.prefix}
                 <Counter target={stat.value} duration={1800 + i * 200} />
                 {stat.suffix}
               </div>
-              <p className="text-sm md:text-base opacity-90 font-light leading-snug">
+              <p className="text-xs md:text-base opacity-90 font-light leading-snug">
                 {stat.label}
               </p>
             </motion.div>

@@ -37,7 +37,9 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
 
   useEffect(() => {
     const colors = ['var(--sage)', 'var(--rose)', 'var(--gold)', '#cddacb', '#f2d4c6']
-    const generated = Array.from({ length: 22 }, (_, i) => ({
+    // Fewer particles on mobile for performance
+    const count = window.innerWidth < 640 ? 12 : 22
+    const generated = Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -55,10 +57,12 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
       className="relative min-h-screen flex items-center justify-center overflow-hidden organic-bg"
       aria-label="כותרת ראשית"
     >
-      {/* Morphing blob backgrounds */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] opacity-20 pointer-events-none"
+      {/* Morphing blob backgrounds — hidden on small screens for perf */}
+      <div
+        className="absolute hidden sm:block opacity-20 pointer-events-none"
         style={{
+          width: 'min(600px, 80vw)',
+          height: 'min(600px, 80vw)',
           background: 'radial-gradient(ellipse, var(--sage) 0%, transparent 70%)',
           top: '-10%',
           right: '-10%',
@@ -66,9 +70,11 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
           willChange: 'transform, border-radius',
         }}
       />
-      <motion.div
-        className="absolute w-[500px] h-[500px] opacity-15 pointer-events-none"
+      <div
+        className="absolute opacity-15 pointer-events-none"
         style={{
+          width: 'min(400px, 60vw)',
+          height: 'min(400px, 60vw)',
           background: 'radial-gradient(ellipse, var(--rose) 0%, transparent 70%)',
           bottom: '-5%',
           left: '-5%',
@@ -76,9 +82,11 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
           willChange: 'transform, border-radius',
         }}
       />
-      <motion.div
-        className="absolute w-[400px] h-[400px] opacity-10 pointer-events-none"
+      <div
+        className="absolute hidden sm:block opacity-10 pointer-events-none"
         style={{
+          width: 'min(400px, 50vw)',
+          height: 'min(400px, 50vw)',
           background: 'radial-gradient(ellipse, var(--gold) 0%, transparent 70%)',
           top: '40%',
           left: '30%',
@@ -111,12 +119,12 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
       {/* Main content */}
       <motion.div
         style={{ y }}
-        className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto"
+        className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-20 sm:pt-0"
       >
         {/* ─── LOGO — גדול ומרכזי, מתכווץ בגלילה ─── */}
         <motion.div
           style={{ scale: logoScale, opacity: logoOpacity }}
-          className="mb-5"
+          className="mb-2 sm:mb-5"
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -125,15 +133,15 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
             className="font-frank font-bold tracking-wide block"
             style={{
               color: 'var(--sage)',
-              fontSize: 'clamp(5rem, 14vw, 10rem)',
+              fontSize: 'clamp(3.5rem, 15vw, 10rem)',
               lineHeight: 1,
             }}
           >
             נטלי
           </span>
           <span
-            className="block font-light tracking-[0.35em] mt-2"
-            style={{ color: 'var(--rose)', fontSize: 'clamp(0.85rem, 2vw, 1.1rem)' }}
+            className="block font-light tracking-[0.3em] sm:tracking-[0.35em] mt-1 sm:mt-2"
+            style={{ color: 'var(--rose)', fontSize: 'clamp(0.7rem, 1.8vw, 1.1rem)' }}
           >
             גוף · נפש · תודעה
           </span>
@@ -142,7 +150,7 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
         {/* ─── תמונה — נעלמת בגלילה ─── */}
         <motion.div
           style={{ opacity: imageOpacity, scale: imageScale }}
-          className="flex justify-center mb-8"
+          className="flex justify-center mb-4 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
@@ -150,11 +158,11 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
           <div
             className="relative overflow-hidden shadow-2xl"
             style={{
-              width: 'clamp(180px, 22vw, 260px)',
-              height: 'clamp(180px, 22vw, 260px)',
+              width: 'clamp(130px, 35vw, 260px)',
+              height: 'clamp(130px, 35vw, 260px)',
               borderRadius: '50%',
               border: '3px solid rgba(143,175,138,0.45)',
-              boxShadow: '0 20px 60px rgba(143,175,138,0.25), 0 0 0 8px rgba(255,255,255,0.5)',
+              boxShadow: '0 20px 60px rgba(143,175,138,0.25), 0 0 0 6px rgba(255,255,255,0.5)',
             }}
           >
             <Image
@@ -163,7 +171,7 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
               fill
               className="object-cover object-top"
               priority
-              sizes="(max-width: 640px) 180px, 260px"
+              sizes="(max-width: 640px) 35vw, 260px"
             />
           </div>
         </motion.div>
@@ -175,16 +183,16 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="flex items-center justify-center gap-3 mb-7"
+            className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-7"
           >
-            <span className="h-px w-12 opacity-40" style={{ background: 'var(--gold)' }} />
+            <span className="h-px w-8 sm:w-12 opacity-40" style={{ background: 'var(--gold)' }} />
             <span
-              className="text-sm font-medium tracking-widest uppercase"
-              style={{ color: 'var(--rose)', fontSize: '0.75rem' }}
+              className="font-medium tracking-wider sm:tracking-widest uppercase"
+              style={{ color: 'var(--rose)', fontSize: 'clamp(0.65rem, 1.8vw, 0.75rem)' }}
             >
               ריפוי הוליסטי · עפולה ואונליין
             </span>
-            <span className="h-px w-12 opacity-40" style={{ background: 'var(--gold)' }} />
+            <span className="h-px w-8 sm:w-12 opacity-40" style={{ background: 'var(--gold)' }} />
           </motion.div>
 
           {/* Main headline */}
@@ -192,8 +200,8 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-frank font-bold leading-tight mb-5"
-            style={{ color: 'var(--charcoal)', fontSize: 'clamp(2.4rem, 6vw, 4.5rem)' }}
+            className="font-frank font-bold leading-tight mb-3 sm:mb-5"
+            style={{ color: 'var(--charcoal)', fontSize: 'clamp(2rem, 6vw, 4.5rem)' }}
           >
             המרחב שלך
             <br />
@@ -205,10 +213,19 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.85 }}
-            className="text-base sm:text-lg md:text-xl font-light mb-3"
-            style={{ color: 'var(--charcoal)', opacity: 0.7 }}
+            className="font-light mb-2 sm:mb-3 px-2 sm:px-0"
+            style={{
+              color: 'var(--charcoal)',
+              opacity: 0.7,
+              fontSize: 'clamp(0.8rem, 2.2vw, 1.1rem)',
+              lineHeight: 1.6,
+            }}
           >
-            NLP · תטא הילינג · אקסס בארס · ליווי תזונתי · ריפוי רגשי לנשים וילדים
+            NLP · תטא הילינג · אקסס בארס
+            <span className="hidden sm:inline"> · ליווי תזונתי · ריפוי רגשי לנשים וילדים</span>
+            <span className="sm:hidden block text-xs mt-0.5" style={{ opacity: 0.6 }}>
+              ליווי תזונתי · ריפוי רגשי לנשים וילדים
+            </span>
           </motion.p>
 
           {/* CTA buttons */}
@@ -216,15 +233,16 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8 mb-10"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-5 sm:mt-8 mb-5 sm:mb-10"
           >
             <button
               onClick={onOpenQuiz}
-              className="group relative px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden"
+              className="group relative w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold transition-all duration-300 hover:shadow-xl hover:-translate-y-1 overflow-hidden"
               style={{
                 background: 'linear-gradient(135deg, var(--sage), #6a9165)',
                 color: 'white',
-                minWidth: '220px',
+                minWidth: '0',
+                maxWidth: '320px',
               }}
               aria-label="פתחי את השאלון לגילוי הטיפול המתאים"
             >
@@ -237,11 +255,12 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
 
             <a
               href="#booking"
-              className="group px-8 py-4 rounded-full text-base font-semibold border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              className="group w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-semibold border-2 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-center"
               style={{
                 borderColor: 'var(--rose)',
                 color: 'var(--rose)',
-                minWidth: '220px',
+                minWidth: '0',
+                maxWidth: '320px',
               }}
               aria-label="קבעי שיחת היכרות חינם"
             >
@@ -255,12 +274,12 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
             onClick={onOpenBreathing}
-            className="flex items-center gap-2 mx-auto text-sm opacity-60 hover:opacity-90 transition-opacity"
+            className="flex items-center gap-2 mx-auto text-xs sm:text-sm opacity-60 hover:opacity-90 transition-opacity"
             style={{ color: 'var(--charcoal)' }}
             aria-label="פתחי תרגיל נשימה"
           >
             <div
-              className="w-5 h-5 rounded-full border"
+              className="w-4 h-4 sm:w-5 sm:h-5 rounded-full border"
               style={{
                 borderColor: 'var(--sage)',
                 animation: 'breathe-circle 4s ease-in-out infinite',
@@ -276,10 +295,10 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         aria-hidden="true"
       >
-        <span className="text-xs opacity-40 tracking-widest" style={{ color: 'var(--charcoal)' }}>
+        <span className="text-xs opacity-40 tracking-widest hidden sm:block" style={{ color: 'var(--charcoal)' }}>
           גלול למטה
         </span>
         <div

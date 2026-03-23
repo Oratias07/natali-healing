@@ -43,7 +43,7 @@ export default function FAQ() {
     <section
       id="faq"
       ref={ref}
-      className="py-24"
+      className="py-16 md:py-24"
       style={{ background: 'var(--cream)' }}
       aria-label="שאלות נפוצות"
     >
@@ -52,13 +52,13 @@ export default function FAQ() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <span className="text-sm tracking-widest uppercase font-medium" style={{ color: 'var(--rose)' }}>
             שאלות נפוצות
           </span>
           <h2
-            className="font-frank text-4xl md:text-5xl font-bold mt-3"
+            className="font-frank text-3xl md:text-5xl font-bold mt-3"
             style={{ color: 'var(--charcoal)' }}
           >
             יש לך שאלות?

@@ -126,7 +126,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="flip-card h-72 cursor-pointer"
+      className="flip-card h-72 cursor-pointer touch-manipulation"
       onClick={() => setFlipped(!flipped)}
       onKeyDown={(e) => e.key === 'Enter' && setFlipped(!flipped)}
       tabIndex={0}
@@ -233,7 +233,7 @@ export default function ServicesGrid() {
     <section
       id="services"
       ref={ref}
-      className="py-24"
+      className="py-16 md:py-24"
       style={{ background: 'linear-gradient(180deg, var(--cream) 0%, rgba(143,175,138,0.06) 100%)' }}
       aria-label="שירותי טיפול"
     >
@@ -242,7 +242,7 @@ export default function ServicesGrid() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <span
             className="text-sm tracking-widest uppercase font-medium"
@@ -251,7 +251,7 @@ export default function ServicesGrid() {
             שירותים
           </span>
           <h2
-            className="font-frank text-4xl md:text-5xl font-bold mt-3 mb-4"
+            className="font-frank text-3xl md:text-5xl font-bold mt-3 mb-4"
             style={{ color: 'var(--charcoal)' }}
           >
             הטיפולים שלי

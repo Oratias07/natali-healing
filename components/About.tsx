@@ -21,7 +21,7 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="py-24 relative overflow-hidden"
+      className="py-16 md:py-24 relative overflow-hidden"
       style={{ background: 'var(--cream)' }}
       aria-label="אודות נטלי"
     >
@@ -40,7 +40,7 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-16"
+          className="text-center mb-10 md:mb-16"
         >
           <span
             className="text-sm tracking-widest uppercase font-medium"
@@ -49,20 +49,20 @@ export default function About() {
             אודות
           </span>
           <h2
-            className="font-frank text-4xl md:text-5xl font-bold mt-3"
+            className="font-frank text-3xl md:text-5xl font-bold mt-3"
             style={{ color: 'var(--charcoal)' }}
           >
             מי אני
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
           {/* Photo placeholder (right in RTL = visual left) */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 md:order-2"
+            className="relative order-1 md:order-2 px-4 sm:px-0"
             aria-hidden="true"
           >
             {/* Morphing photo frame */}
@@ -87,7 +87,7 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-4 -right-4 glass rounded-2xl px-4 py-3 shadow-lg"
+                className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 glass rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-lg"
               >
                 <p className="text-xs font-semibold" style={{ color: 'var(--charcoal)' }}>
                   NLP מסטר
@@ -100,7 +100,7 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -top-4 -left-4 glass rounded-2xl px-4 py-3 shadow-lg"
+                className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 glass rounded-2xl px-3 sm:px-4 py-2 sm:py-3 shadow-lg"
               >
                 <p className="text-2xl">🌿</p>
                 <p className="text-xs font-semibold mt-1" style={{ color: 'var(--sage)' }}>
@@ -127,21 +127,21 @@ export default function About() {
             </div>
 
             <p
-              className="text-base md:text-lg leading-relaxed mb-6"
+              className="text-sm md:text-lg leading-relaxed mb-5"
               style={{ color: 'var(--charcoal)', opacity: 0.85 }}
             >
               שמי נטלי, אנלפיסטתית בדרגת מסטר, מלווה ומאמנת לריפוי רגשי עמוק, טיפול בחרדות, מיקוד מטרות, העצמה ומדריכה לאורח חיים בבריאות טבעית, בנוסף מלווה סשאנים בתטא הילינג ובאקסס בארס, הכל במטרה להחזיר את החוסן הנפשי, המיקוד ושמחת החיים שלך.
             </p>
 
             <p
-              className="text-base md:text-lg leading-relaxed mb-6"
+              className="text-sm md:text-lg leading-relaxed mb-5"
               style={{ color: 'var(--charcoal)', opacity: 0.85 }}
             >
               הטיפולים משולבים מהעולם המנטאלי והרוחני – הכל בראייה הוליסטית משולבת של האדם – גוף, נפש ותודעה. הטיפול שלי משלב מגוון שיטות טיפול מוכחות כמו NLP, CBT, דימיון מודרך, תטא הילינג, אקסס בארס, לצד ליווי לאורח חיים מבוסס בריאות טבעית, טיפולי מים, תנועה, נשימה ומדיטציה.
             </p>
 
             <p
-              className="text-base md:text-lg leading-relaxed mb-10"
+              className="text-sm md:text-lg leading-relaxed mb-7 md:mb-10"
               style={{ color: 'var(--charcoal)', opacity: 0.85 }}
             >
               אני מאמינה שריפוי אמיתי ושינוי משמעותי נוצרים כשאנחנו רואים את כל המכלול שלך — גוף נפש ותודעה. אני מלווה נשים וילדים באווירה מקצועית, חמה ומכילה, מתוך הקשבה אמיתית והתאמה אישית מלאה לצרכים שלך.

@@ -71,7 +71,7 @@ export default function ContactForm() {
     <section
       id="contact"
       ref={ref}
-      className="py-24"
+      className="py-16 md:py-24"
       style={{ background: 'linear-gradient(180deg, rgba(143,175,138,0.06) 0%, var(--cream) 100%)' }}
       aria-label="טופס יצירת קשר"
     >
@@ -80,13 +80,13 @@ export default function ContactForm() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <span className="text-sm tracking-widest uppercase font-medium" style={{ color: 'var(--rose)' }}>
             צרי קשר
           </span>
           <h2
-            className="font-frank text-4xl md:text-5xl font-bold mt-3 mb-4"
+            className="font-frank text-3xl md:text-5xl font-bold mt-3 mb-4"
             style={{ color: 'var(--charcoal)' }}
           >
             כתבי לי

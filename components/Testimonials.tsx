@@ -119,7 +119,7 @@ export default function Testimonials() {
     <section
       id="testimonials"
       ref={ref}
-      className="py-24 overflow-hidden"
+      className="py-16 md:py-24 overflow-hidden"
       style={{ background: 'var(--cream)' }}
       aria-label="סיפורי שינוי"
     >
@@ -128,12 +128,12 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-14"
+          className="text-center mb-10 md:mb-14"
         >
           <span className="text-sm tracking-widest uppercase font-medium" style={{ color: 'var(--rose)' }}>
             עדויות
           </span>
-          <h2 className="font-frank text-4xl md:text-5xl font-bold mt-3 mb-3" style={{ color: 'var(--charcoal)' }}>
+          <h2 className="font-frank text-3xl md:text-5xl font-bold mt-3 mb-3" style={{ color: 'var(--charcoal)' }}>
             סיפורי שינוי
           </h2>
           <p className="text-base opacity-60" style={{ color: 'var(--charcoal)' }}>

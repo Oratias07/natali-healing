@@ -229,3 +229,46 @@ body {
   background-image: radial-gradient(circle, rgba(143, 175, 138, 0.3) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+/* ── Mobile optimizations ── */
+
+/* Prevent horizontal overflow site-wide */
+body {
+  overflow-x: hidden;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 639px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Carousel: better momentum scrolling on iOS */
+  .carousel-container {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+
+  /* Reduce section spacing on small screens */
+  section {
+    overflow-x: clip;
+  }
+
+  /* Flip cards: use tap instead of hover on mobile */
+  .flip-card:hover .flip-card-inner {
+    transform: none;
+  }
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Safe area support for modern phones (notch/rounded corners) */
+@supports (padding: max(0px)) {
+  .fixed.bottom-6 {
+    bottom: max(1.5rem, env(safe-area-inset-bottom));
+  }
+  footer {
+    padding-bottom: max(2rem, env(safe-area-inset-bottom));
+  }
+}

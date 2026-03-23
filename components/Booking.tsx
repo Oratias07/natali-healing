@@ -13,7 +13,7 @@ export default function Booking() {
     <section
       id="booking"
       ref={ref}
-      className="py-24 relative overflow-hidden"
+      className="py-16 md:py-24 relative overflow-hidden"
       style={{
         background: 'linear-gradient(135deg, rgba(143,175,138,0.08) 0%, rgba(196,146,122,0.06) 100%)',
       }}
@@ -25,13 +25,13 @@ export default function Booking() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-8 md:mb-12"
         >
           <span className="text-sm tracking-widest uppercase font-medium" style={{ color: 'var(--rose)' }}>
             קביעת פגישה
           </span>
           <h2
-            className="font-frank text-4xl md:text-5xl font-bold mt-3 mb-4"
+            className="font-frank text-3xl md:text-5xl font-bold mt-3 mb-4"
             style={{ color: 'var(--charcoal)' }}
           >
             בואי נתחיל את המסע
@@ -47,7 +47,7 @@ export default function Booking() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="rounded-3xl p-8"
+            className="rounded-3xl p-6 sm:p-8"
             style={{
               background: 'linear-gradient(135deg, var(--sage), #6a9165)',
               color: 'white',
@@ -67,7 +67,7 @@ export default function Booking() {
               href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent('היי נטלי 🌿 אני רוצה לקבוע שיחת היכרות חינם!')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 text-sm font-semibold transition-all hover:shadow-md hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 bg-white rounded-full px-5 sm:px-6 py-3 text-sm font-semibold transition-all hover:shadow-md hover:-translate-y-0.5 w-full sm:w-auto"
               style={{ color: 'var(--sage)' }}
               aria-label="קבעי שיחת היכרות חינם בוואטסאפ"
             >
