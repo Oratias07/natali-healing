@@ -16,6 +16,7 @@ import Booking from '@/components/Booking'
 import ContactForm from '@/components/ContactForm'
 import WhatsAppFloat from '@/components/WhatsAppFloat'
 import Footer from '@/components/Footer'
+import GlobalParticles from '@/components/GlobalParticles'
 
 export default function HomePage() {
   const [quizOpen, setQuizOpen] = useState(false)
@@ -23,6 +24,7 @@ export default function HomePage() {
 
   return (
     <main>
+      <GlobalParticles />
       <Nav />
 
       <Hero

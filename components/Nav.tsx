@@ -13,10 +13,15 @@ const navLinks = [
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
+  const [logoVisible, setLogoVisible] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40)
+      // Nav logo fades in as hero logo finishes its journey (~45% of viewport)
+      setLogoVisible(window.scrollY > window.innerHeight * 0.43)
+    }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -35,10 +40,11 @@ export default function Nav() {
       aria-label="ניווט ראשי"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo — hidden while hero logo is visible, fades in after hero logo travels here */}
         <a
           href="#"
-          className="flex flex-col items-end group"
+          className="flex flex-col items-end group transition-opacity duration-500"
+          style={{ opacity: logoVisible ? 1 : 0, pointerEvents: logoVisible ? 'auto' : 'none' }}
           aria-label="נטלי — המרחב לריפוי, חזרה לדף הבית"
         >
           <span

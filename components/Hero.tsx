@@ -1,32 +1,27 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
-interface Particle {
-  id: number
-  x: number
-  y: number
-  size: number
-  duration: number
-  delay: number
-  color: string
-}
-
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_NATALI_WHATSAPP || '972000000000'
-
 export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () => void; onOpenBreathing: () => void }) {
-  const [particles, setParticles] = useState<Particle[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: containerRef })
 
   // Parallax movement for the whole block
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
 
-  // Logo: shrinks dramatically on scroll, then fades out
-  const logoScale = useTransform(scrollYProgress, [0, 0.5], [1, 0.32])
-  const logoOpacity = useTransform(scrollYProgress, [0.35, 0.65], [1, 0])
+  // Logo: moves toward top-right corner (where Nav logo lives), then fades as Nav logo appears
+  const logoX = useTransform(scrollYProgress, (v) => {
+    if (typeof window === 'undefined') return 0
+    return Math.min(v / 0.45, 1) * window.innerWidth * 0.41
+  })
+  const logoY = useTransform(scrollYProgress, (v) => {
+    if (typeof window === 'undefined') return 0
+    return Math.min(v / 0.45, 1) * window.innerHeight * -0.34
+  })
+  const logoScale = useTransform(scrollYProgress, [0, 0.45], [1, 0.16])
+  const logoOpacity = useTransform(scrollYProgress, [0.28, 0.48], [1, 0])
 
   // Image: fades out early and shrinks slightly
   const imageOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0])
@@ -34,22 +29,6 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
 
   // Rest of the content (eyebrow, H1, CTAs): fades slightly later
   const contentOpacity = useTransform(scrollYProgress, [0.05, 0.6], [1, 0])
-
-  useEffect(() => {
-    const colors = ['var(--sage)', 'var(--rose)', 'var(--gold)', '#cddacb', '#f2d4c6']
-    // Fewer particles on mobile for performance
-    const count = window.innerWidth < 640 ? 12 : 22
-    const generated = Array.from({ length: count }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 5 + 2,
-      duration: Math.random() * 15 + 12,
-      delay: Math.random() * 10,
-      color: colors[Math.floor(Math.random() * colors.length)],
-    }))
-    setParticles(generated)
-  }, [])
 
   return (
     <section
@@ -98,32 +77,14 @@ export default function Hero({ onOpenQuiz, onOpenBreathing }: { onOpenQuiz: () =
       {/* Dot pattern overlay */}
       <div className="absolute inset-0 dot-pattern opacity-30 pointer-events-none" />
 
-      {/* Floating sparkle particles */}
-      {particles.map((p) => (
-        <div
-          key={p.id}
-          className="absolute rounded-full pointer-events-none"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            background: p.color,
-            animation: `particle-float ${p.duration}s ease-in-out ${p.delay}s infinite`,
-            opacity: 0.6,
-            willChange: 'transform, opacity',
-          }}
-        />
-      ))}
-
       {/* Main content */}
       <motion.div
         style={{ y }}
         className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto pt-20 sm:pt-0"
       >
-        {/* ─── LOGO — גדול ומרכזי, מתכווץ בגלילה ─── */}
+        {/* ─── LOGO — גדול ומרכזי, נע לפינה הימנית העליונה בגלילה ─── */}
         <motion.div
-          style={{ scale: logoScale, opacity: logoOpacity }}
+          style={{ scale: logoScale, opacity: logoOpacity, x: logoX, y: logoY }}
           className="mb-2 sm:mb-5"
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
