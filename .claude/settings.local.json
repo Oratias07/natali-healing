@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs cat:*)",
+      "Bash(wc -l /c/Users/atias/claudeprojects/natali-healing/components/*.tsx)",
+      "Bash(find /c/Users/atias/claudeprojects/natali-healing -type f -not -path */node_modules/* -not -path */.next/*)",
+      "Bash(grep -r \"TWILIO\\\\|Twilio\\\\|whatsapp\" /c/Users/atias/claudeprojects/natali-healing --include=*.ts --include=*.tsx --include=*.md)",
+      "Bash(npm install:*)"
+    ]
+  }
+}
